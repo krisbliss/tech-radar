@@ -9,7 +9,7 @@
         },  
     {
         "id" : 2,
-        "radius" : 0.5,
+        "radius" : 1,
         "angle" : 120,
         "label" : "Goodbye",
         "link" : "",
