@@ -1,0 +1,30 @@
+{
+  "name": "vital-technology-radar",
+  "version": "1.0.0",
+  "description": "This techradar has the goal that each company/department can create its own visualization of the trends to be focused on. To maintain the content of the techradar this one provides the possibility to dynamically add and edit the blips on the radar.",
+  "main": "./dist/technology-radar.js",
+  "scripts": {
+    "build": ".\\node_modules\\.bin\\webpack-cli --mode development",
+    "start": "webpack-dev-server"
+  },
+  "author": "Kris Bliss",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
+    "html-webpack-plugin": "^3.2.0",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "webpack": "^4.12.2",
+    "webpack-dev-server": "^3.1.4",
+    "webpack-cli": "^3.0.8"
+  },
+  "dependencies": {
+    "d3": "3.5.17",
+    "isomorphic-fetch": "^2.2.1",
+    "technology-radar": "^1.1.0"
+  }
+}
