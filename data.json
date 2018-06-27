@@ -18,8 +18,8 @@
 
     {
         "id" : 3,
-        "radius" : 1,
-        "angle" : 180,
+        "radius" : 0.5,
+        "angle" : 120,
         "label" : "yo-yo",
         "link" : "https://www.yo-yo.com/",
         "movementId" : 0
