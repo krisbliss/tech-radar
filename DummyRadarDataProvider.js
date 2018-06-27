@@ -2,7 +2,15 @@ const fetch = require("isomorphic-fetch");
 
 export default class DummyRadarDataProvider {
     constructor() {
-        this.data = [
+            this.data = fetch('https://raw.githubusercontent.com/krisbliss/tech-radar/master/data.json')
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(myJson) {
+                    console.log(myJson);
+                    return myJson;
+                });
+    /*    this.data = [
             {
                 "id" : 1,
                 "radius" : 1,
@@ -19,7 +27,7 @@ export default class DummyRadarDataProvider {
                 "link" : "",
                 "movementId" : 1
             }
-        ];
+        ];*/
     }
 
     load() {
