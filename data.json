@@ -1,7 +1,7 @@
 [
         {
         "id" : 1,
-        "radius" : 1,
+        "radius" : 0.2,
         "angle" : 45,
         "label" : "Hello",
         "link" : "http://google.de",
@@ -9,7 +9,7 @@
         },  
     {
         "id" : 2,
-        "radius" : 0.6,
+        "radius" : 0.5,
         "angle" : 120,
         "label" : "Goodbye",
         "link" : "",
