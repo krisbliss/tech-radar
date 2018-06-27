@@ -7,7 +7,7 @@ export default class DummyRadarDataProvider {
                     return response.json();
                 })
                 .then(function(myJson) {
-                    console.log(myJson);
+                    //console.log(myJson);
                     return myJson;
                 });
     /*    this.data = [

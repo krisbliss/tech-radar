@@ -14,5 +14,14 @@
         "label" : "Goodbye",
         "link" : "",
         "movementId" : 1
+    },
+
+    {
+        "id" : 3,
+        "radius" : 1,
+        "angle" : 180,
+        "label" : "yo-yo",
+        "link" : "https://www.yo-yo.com/",
+        "movementId" : 0
     }
 ]
