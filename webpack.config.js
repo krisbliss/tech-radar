@@ -4,10 +4,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
-    entry: "./app.js",
+    entry: {
+        global: "./app.js",
+    },
+
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
+        //library: 'Entry'
     },
     module: {
         /*loaders: [
@@ -22,6 +26,13 @@ module.exports = {
     },
     plugins: [
         //new UglifyJSPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin()
     ],
-    //devtool: "#source-map"
+    //watch: true,
+    devtool: "cheap-eval-source-map",
+    devServer: {
+        hot: true,
+        contentBase: path.resolve(__dirname, 'dist'),
+    }
 };
