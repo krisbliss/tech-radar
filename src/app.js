@@ -1,7 +1,7 @@
 'use strict';
 
 import * as d3 from 'd3';
-import Radar from 'technology-radar';
+import Radar from 'technology-radar/src/Radar';
 import DummyRadarDataProvider from './DummyRadarDataProvider';
 
 var radarOptions = {
@@ -17,3 +17,9 @@ radar.render();
 document.getElementById("editButton").addEventListener("click", function() {
 	radar.setEditMode(!radar.getEditMode());
 });
+
+
+//this if statment for hot module replacment for web-dev server
+if (module.hot){
+	module.hot.accept();
+}

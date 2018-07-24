@@ -1,38 +1,30 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-    entry: {
-        global: "./app.js",
+    entry: { 
+        app:path.resolve(__dirname, "./src/app.js"),
     },
-
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js',
-        //library: 'Entry'
+        path: path.resolve(__dirname, 'public'),
+        filename: '[name].bundle.js',
     },
     module: {
-        /*loaders: [
-            {
-                loader: 'babel-loader',
-                include: [
-                    path.resolve(__dirname, "src")
-                ],
-                test: /\.js$/
-            }
-        ]*/
+
     },
+
     plugins: [
-        //new UglifyJSPlugin()
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin()
     ],
-    //watch: true,
-    devtool: "cheap-eval-source-map",
-    devServer: {
+
+    devServer:{
+        contentBase: path.join(__dirname,'./public'),
+        port: 8080,
         hot: true,
-        contentBase: path.resolve(__dirname, 'dist'),
-    }
+    },
+    
+    devtool: 'cheap-eval-source-map'
 };

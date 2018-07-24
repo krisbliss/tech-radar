@@ -2,32 +2,17 @@ const fetch = require("isomorphic-fetch");
 
 export default class DummyRadarDataProvider {
     constructor() {
-            this.data = fetch('https://raw.githubusercontent.com/krisbliss/tech-radar/master/data.json')
-                .then(function(response) {
-                    return response.json();
-                })
-                .then(function(myJson) {
-                    //console.log(myJson);
-                    return myJson;
-                });
-    /*    this.data = [
-            {
-                "id" : 1,
-                "radius" : 1,
-                "angle" : 45,
-                "label" : "HBase",
-                "link" : "http://google.de",
-                "movementId" : 0
-            },
-            {
-                "id" : 2,
-                "radius" : 0.6,
-                "angle" : 120,
-                "label" : "Apache Kafka",
-                "link" : "",
-                "movementId" : 1
-            }
-        ];*/
+        var url = 'http://localhost:8080/';//url and port that server.js is listenting at
+
+        this.data = fetch(url,{mode:'cors'})
+        .then((respons)=>{
+            return respons.json();
+        }).then((jsonData)=>{
+             return jsonData;  
+        }).catch((err)=>{
+            console.log('Could not retrived data from %s',url);
+        })
+
     }
 
     load() {
@@ -128,4 +113,9 @@ export default class DummyRadarDataProvider {
             ]
         }
     }
+}
+
+//this if statment for hot module replacment for web-dev server
+if (module.hot){
+	module.hot.accept();
 }
