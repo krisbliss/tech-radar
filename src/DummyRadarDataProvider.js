@@ -1,18 +1,24 @@
 const fetch = require("isomorphic-fetch");
+var fs = require('fs');
 
 export default class DummyRadarDataProvider {
     constructor() {
-        var url = 'http://localhost:8080/';//url and port that server.js is listenting at
+        this.data = this.fetchData().then((value)=>{
+            return value;
+        });
+    }
 
-        this.data = fetch(url,{mode:'cors'})
-        .then((respons)=>{
-            return respons.json();
-        }).then((jsonData)=>{
-             return jsonData;  
-        }).catch((err)=>{
-            console.log('Could not retrived data from %s',url);
-        })
+    fetchData() {
 
+        return fetch ('http://localhost:8080/',{mode:'cors'})
+            .then((respons)=>{
+                return respons.json();
+            }).then((jsonData)=>{
+                 return jsonData;  
+                 //callback(jsonData);  
+            }).catch((err)=>{
+                console.log('Could not retrived data from');
+            })
     }
 
     load() {

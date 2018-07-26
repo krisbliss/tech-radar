@@ -6,7 +6,8 @@
   "scripts": {
     "build:dev": ".\\node_modules\\.bin\\webpack-cli --mode development",
     "build:prod": ".\\node_modules\\.bin\\webpack-cli --mode production",
-    "start": "webpack-dev-server --open"
+    "start:dev": "webpack-dev-server --open",
+    "start": "node server.js"
   },
   "author": "Kris Bliss",
   "license": "MIT",

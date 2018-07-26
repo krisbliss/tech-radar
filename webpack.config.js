@@ -11,8 +11,9 @@ module.exports = {
         path: path.resolve(__dirname, 'public'),
         filename: '[name].bundle.js',
     },
-    module: {
-
+    
+    node: {
+        fs:'empty'
     },
 
     plugins: [
