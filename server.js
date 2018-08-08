@@ -1,36 +1,116 @@
-var provider = require('./src/provider');
-
-// koa is here just for experemintation and trial
-const koa = require('koa');
-var k_server = new koa();
-
-// express is primary form of node.js server
 const express = require('express');
-var e_server = express();
+var server = express();
+var fs = require('fs');
+var path = require('path');
+var provider = require('./src/provider');
+var request = require('request')
 
-//set headers
-e_server.use((req, resp, next) => {
-    resp.header('Access-Control-Allow-Origin',['*']);
-    resp.header('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept');
-    //resp.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    //resp.append('Access-Control-Allow-Headers','Content-Type');
+var config = fs.readFileSync('./config.json');
+config = JSON.parse(config);
+var url = config["url"];
+
+/****************************************************************************
+ * setting headers for server
+/****************************************************************************/
+server.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
 });
 
-//get request for json data from website of choice
-e_server.get('/',(request,response) => {
+
+
+/****************************************************************************
+ * Sends file to localhost
+/****************************************************************************/
+server.get('/', (request, response) => {
     
-    //Promise Function
-    provider.getData().then((data)=>{
-        response.send(JSON.stringify(data,null,4));  //Using JSON.stringify with (null,4) command formats data neatly but servers no other perpous 
+    fs.stat('./src/data.json',(err,status)=> {
+        
+        if(err){
+            provider.getBitBucketData((data) => {
+                fs.writeFileSync('./src/data.json', data);
+
+                response.send(data);
+            })
+        }
+
+        else{
+            let fileData = fs.readFileSync('./src/data.json');
+            response.send(JSON.parse(fileData,null,4));
+        }
+
     })
+        
+})
 
-}) 
 
-//app.js
-e_server.use('/radar', express.static('./public'));
+/****************************************************************************
+ * Reset Button to return data on radar back to data stored in bitBucket
+/****************************************************************************/
+server.post('/resetButton',(request, response)=>{
 
-//listing port
-e_server.listen(8080,function(){
-    console.log('server is listening on 8080');
+     provider.getBitBucketData((data) => {
+            fs.writeFileSync('./src/data.json', data);
+                let fileData = fs.readFileSync('./src/data.json')
+                response.send(fileData);
+            })
+})
+
+
+
+/****************************************************************************
+ * Handles post from app.js for uploaded file (needs to be able to reject none .json files)
+/****************************************************************************/
+server.use(require('body-parser').text())
+
+// retrieves uploaded data sent from app.js front end at localhost:8080/uploadNewFile
+server.post('/uploadNewFile',(request,response)=>{
+    console.log('post from new file',request.body);
+    fs.writeFileSync('./src/data.json',request.body);
+    response.send("spaget"); // must send a response to complete the request
+})
+
+
+
+/****************************************************************************
+ * Handles post from DummyRadarProvider.js for modified data 
+/****************************************************************************/
+server.use(require('body-parser').text())
+
+// retrieves uploaded data sent from app.js front end at localhost:8080/uploadNewFile
+server.post('/uploadNewData',(request,response)=>{
+    console.log(request.body);
+
+    // if ()
+        fs.writeFileSync('./src/data.json',request.body);
+        response.send("spaget"); // must send a response to complete the request
+})
+
+
+/****************************************************************************
+ * config.txt info for radar to read
+/****************************************************************************/
+//server.use(require('body-parser').text())
+server.use('/team',(request,response)=>{
+    let teamInfo = fs.readFileSync('./config.json');
+    response.send(teamInfo);
+    
+ })
+ 
+
+
+
+/****************************************************************************
+ * Serving the index.html file (aka the radar application)
+/****************************************************************************/
+// serves app.js
+server.use('/radar', express.static('./public')); //will read the index.html file by default
+
+//listen for connections 
+server.listen(8080, function() {
+    console.log('Server listening at Port 8080');
 });
+
+
+/*************************************************************************** */

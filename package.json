@@ -1,35 +1,37 @@
 {
-  "name": "vital-technology-radar",
-  "version": "1.0.0",
-  "description": "This techradar has the goal that each company/department can create its own visualization of the trends to be focused on. To maintain the content of the techradar this one provides the possibility to dynamically add and edit the blips on the radar.",
-  "main": "./dist/technology-radar.js",
-  "scripts": {
-    "build:dev": ".\\node_modules\\.bin\\webpack-cli --mode development",
-    "build:prod": ".\\node_modules\\.bin\\webpack-cli --mode production",
-    "start:dev": "webpack-dev-server --open",
-    "start": "node server.js"
-  },
-  "author": "Kris Bliss",
-  "license": "MIT",
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-es2015": "^6.24.1",
-    "express": "^4.16.3",
-    "html-webpack-plugin": "^3.2.0",
-    "koa": "^2.5.2",
-    "uglifyjs-webpack-plugin": "^1.2.7",
-    "webpack": "^4.12.2",
-    "webpack-cli": "^3.0.8",
-    "webpack-dev-server": "^3.1.4"
-  },
-  "dependencies": {
-    "d3": "3.5.17",
-    "isomorphic-fetch": "^2.2.1",
-    "request": "^2.87.0",
-    "technology-radar": "^1.1.0"
-  }
+    "name": "vital-technology-radar",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "start:dev": "webpack-dev-server --open --mode development",
+        "build:prod": "webpack-cli --mode production",
+        "build:dev": ".\\node_modules\\.bin\\webpack-cli --mode development --watch",
+        "start": "node server.js"
+    },
+    "keywords": [],
+    "author": "Kris Bliss",
+    "license": "ISC",
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-core": "^6.26.0",
+        "babel-loader": "^7.1.2",
+        "babel-polyfill": "^6.26.0",
+        "babel-preset-env": "^1.6.0",
+        "babel-preset-es2015": "^6.24.1",
+        "express": "^4.16.3",
+        "html-webpack-plugin": "^3.2.0",
+        "uglifyjs-webpack-plugin": "^1.2.7",
+        "webpack": "^4.16.3",
+        "webpack-cli": "^3.1.0",
+        "webpack-dev-server": "^3.1.5"
+    },
+    "dependencies": {
+        "body-parser": "^1.18.3",
+        "d3": "^3.5.17",
+        "isomorphic-fetch": "^2.2.1",
+        "npm": "^6.2.0",
+        "request": "^2.87.0",
+        "technology-radar": "^1.1.0"
+    }
 }
