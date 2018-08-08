@@ -1,8 +1,9 @@
 ﻿<!DOCTYPE html>
+<!-- This is the front end webpage -->
 <html>
 
 <head>
-    <title>Tech-Radar</title>
+    <title>Techradar</title>
 
     <meta charset="UTF-8" />
 
@@ -10,7 +11,44 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 
+    <!-- Style setup just for the Edit button -->
     <style>
+        .button {
+                /*border: none;*/
+                background-color: inherit;
+                padding: 12px 28px;
+                font-size: 16px;
+                cursor: pointer;
+                display: inline-block;
+        }
+
+        .button:hover {
+                background: rgb(21, 197, 21);
+                font: 700;
+        }
+
+        .button:after {
+                content: "";
+                background: #90EE90;
+                display: block;
+                position: absolute;
+                /* padding-top: 300%;
+                padding-left: 350%; */
+                margin-left: -20px!important;
+                margin-top: -120%;
+                opacity: 0;
+                transition: all 0.8s
+        }
+        
+        button:active {
+            background: #e5e5e5;
+            -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+            -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+            box-shadow: inset 0px 0px 5px #c1c1c1;
+        }
+        /* .success {color: green;} */
+
+
         body {
             font-family: 'Open Sans', sans-serif;
             font-size: 11px;
@@ -29,16 +67,33 @@
         .tooltip {
             fill: #333333;
         }
+        
     </style>
 </head>
 
 <body>
-    <h1>SysEng Techradar</h1>
-    <script src="app.bundle.js"></script>
-    <div id="techradarContainer"></div>
-    <button id="editButton">Edit</button>
-    <A HREF="javascript:history.go(0)">Click to refresh the page and see changes</A>
+    
+    <!-- Downloads current data.json file stored in server -->
+    <a href="/" download="data.json">data.json</a>
+    <h1 id="htmlHeader">Tech-Radar</h1>
 
+    <!-- container that displays the radar -->
+    <div id="techradarContainer"></div>
+     
+    <!-- Fancy Edit button that allows new data points to be added or moved arround (not allowed to delete items yet) -->
+     <button class="button"id="editButton">Edit</button> 
+
+    <!-- section for storing uploaded data to the data.json file stored in the server --> 
+    <br><br>
+    <input type="file" id="fileInput" />
+    <button id="uploadButton">Upload</button>
+
+    <!-- Reset Button for setting all data stored in server data.json to the current values in BitBucket-->
+    <br><br>
+    <button id='bitBucketReset' onclick="history.go(0)">Reset Data to BitBucket Defaults</button>
+    
+
+    <script src="./dist/bundle.js"></script> 
 </body>
 
 </html>
