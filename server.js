@@ -5,9 +5,7 @@ var path = require('path');
 var provider = require('./src/provider');
 var request = require('request')
 
-var config = fs.readFileSync('./config.json');
-config = JSON.parse(config);
-var url = config["url"];
+
 
 /****************************************************************************
  * setting headers for server
@@ -21,7 +19,27 @@ server.use(function (req, res, next) {
 
 
 /****************************************************************************
- * Sends file to localhost
+ * Sets config.json data file
+/****************************************************************************/
+// retrieves uploaded data sent from app.js front end at localhost:8080/uploadNewFile
+server.use(require('body-parser').text());
+server.post('/setConfig',(request,response)=>{
+    console.log(request.body);// returning "undefined" instead of json string
+
+    // file reads and writes for config.json
+
+    // var config = fs.readFileSync('./config.json');
+    // config = JSON.parse(config);
+    // var url = config["url"];
+
+    fs.writeFileSync('./config.json',request.body);
+    response.send("spaget"); // must send a response to complete the request
+})
+
+
+
+/****************************************************************************
+ * Sends data.json info to frontend app page
 /****************************************************************************/
 server.get('/', (request, response) => {
     
@@ -39,9 +57,7 @@ server.get('/', (request, response) => {
             let fileData = fs.readFileSync('./src/data.json');
             response.send(JSON.parse(fileData,null,4));
         }
-
     })
-        
 })
 
 
@@ -82,7 +98,6 @@ server.use(require('body-parser').text())
 server.post('/uploadNewData',(request,response)=>{
     console.log(request.body);
 
-    // if ()
         fs.writeFileSync('./src/data.json',request.body);
         response.send("spaget"); // must send a response to complete the request
 })
@@ -93,12 +108,12 @@ server.post('/uploadNewData',(request,response)=>{
 /****************************************************************************/
 //server.use(require('body-parser').text())
 server.use('/team',(request,response)=>{
+
     let teamInfo = fs.readFileSync('./config.json');
     response.send(teamInfo);
     
  })
  
-
 
 
 /****************************************************************************
@@ -112,5 +127,3 @@ server.listen(8080, function() {
     console.log('Server listening at Port 8080');
 });
 
-
-/*************************************************************************** */

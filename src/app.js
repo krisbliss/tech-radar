@@ -5,16 +5,61 @@ import DummyRadarDataProvider from "./DummyRadarDataProvider";
 import provider from "./provider";
 import request from "request";
 
+var configData;
 
 /************************************************************************
-* Sets the defaults for the created radar (NEEDS WORK)L
+* Sets the defaults for the created radar (NEEDS WORK)
 ************************************************************************/
+
 var header = document.getElementById("htmlHeader");
 request.get("http://localhost:8080/team", (error, response, body) => {
 
-	body = (JSON.parse(body));
-	header.innerHTML = body["name"];
+	configData = (JSON.parse(body));
+	console.log(JSON.stringify(configData));
+	//header.innerHTML = body["name"];
+	
+	if (configData["name"] == ""){
+			configData["name"] = prompt("Type in team name",configData["name"]);
+			configData["url"] = prompt("Copy & Paste link for RAW data file from BitBucket",configData["url"]);
+
+			// Posting new "this.data" JSON object to server '/uploadNewData'
+			const xhr = new XMLHttpRequest();
+			xhr.onload = () => {
+				alert('Ready to Save Modified Data');
+			};
+			xhr.open('post', '/setConfig');
+	
+
+			// send data to the server path '/setConfig'
+			xhr.send(JSON.stringify(configData,null,4));
+	}
+	header.innerHTML = configData["name"];
+
+
 })
+	console.log("Header title: ",header.innerHTML);
+
+
+
+/************************************************************************
+* Button for editing url
+************************************************************************/
+var setConfig = document.getElementById("setConfig").addEventListener('click',()=>{
+	
+	
+	//configData["name"] = prompt("Type in team name",header.innerHTML);
+	configData["url"] = prompt("Copy & Paste link for RAW data file from BitBucket","");
+
+	// Posting new "this.data" JSON object to server '/uploadNewData'
+	const xhr = new XMLHttpRequest();
+	xhr.onload = () => {
+		alert('Ready to Save Modified Data');
+	};
+	xhr.open('post', '/setConfig');
+	// send data to the server path '/setConfig'
+	xhr.send(JSON.stringify(configData,null,4));
+
+});
 
 
 /************************************************************************
