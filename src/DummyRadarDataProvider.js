@@ -8,6 +8,17 @@ const path = require('path');
 export default class DummyRadarDataProvider {
         constructor() {
             // no data is needed as app.js creates this.data for the class
+            
+            //* ONLY UNCOMMENT ''fetch' IF YOU ARE USINGE 'WEBPACK DEV SERVER' * 
+             /*
+             fetch('your_url_here', {mode:'no-cors'})
+                .then((response) => {
+                return response.json();
+                }).then((jsonData) => {
+                console.log("Response: ", jsonData);
+                return jsonData;
+                })
+            */
         }
 
 

@@ -55,7 +55,7 @@ server.get('/', (request, response) => {
 
         else{
             let fileData = fs.readFileSync('./src/data.json');
-            response.send(JSON.parse(fileData,null,4));
+            response.send(fileData);
         }
     })
 })

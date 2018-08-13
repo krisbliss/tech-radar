@@ -6,7 +6,7 @@
     "scripts": {
         "start:dev": "webpack-dev-server --open --mode development",
         "build:prod": "webpack-cli --mode production",
-        "build:dev": ".\\node_modules\\.bin\\webpack-cli --mode development --watch",
+        "build:dev": ".\\node_modules\\.bin\\webpack-cli --mode development",
         "start": "node server.js"
     },
     "keywords": [],

@@ -1,1 +1,35 @@
-[{"id":1,"radius":0.5,"angle":45,"label":"YO-YO-YO","link":"https://vitalimages.com","movementId":0,"x":106.06601717798213,"y":-106.06601717798212},{"id":2,"radius":0.6,"angle":120,"label":"Hello","link":"http://google.de","movementId":1,"x":-89.99999999999996,"y":-155.88457268119896},{"id":3,"radius":0.6,"angle":60,"label":"Mario","link":"http://google.org","movementId":0,"x":90.00000000000001,"y":-155.88457268119896},{"id":4,"radius":0.57835585668497,"angle":252.56040604717566,"label":"spaget","link":"","movementId":0}]
+[
+    {
+        "id" : 1,
+        "radius" : 0.5,
+        "angle" : 45,
+        "label" : "Eric",
+        "link" : "https://vitalimages.com",
+        "movementId" : 0
+    },
+    {
+        "id" : 2,
+        "radius" : 0.6,
+        "angle" : 120,
+        "label" : "Matt",
+        "link" : "http://google.de",
+        "movementId" : 1
+    },
+    {
+        "id" : 3,
+        "radius" : 0.6,
+        "angle" : 60,
+        "label" : "Jason",
+        "link" : "http://google.org",
+        "movementId" : 0
+    },
+
+    {
+        "id" : 4,
+        "radius" : 1,
+        "angle" : 172,
+        "label" : "Scott",
+        "link" : "https://www.wikipedia.org/",
+        "movementId" : 0
+    }
+]

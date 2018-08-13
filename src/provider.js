@@ -16,9 +16,7 @@ module.exports.getBitBucketData = function(callback){
     var url = config["url"];
     let options = {
         url: url,
-        //url: 'https://bitbucket.vitalimages.com/users/kbliss/repos/techradardata/raw/test-data.json?at=refs%2Fheads%2Fmaster',
         rejectUnauthorized: false,
-        // cert: fs.readFileSync(certFile),   // May be needed for docker running from other machie than the one this program was created on
     }
 
 
