@@ -7,12 +7,14 @@ WORKDIR /usr/radar
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 COPY package*.json ./
 
-# If you are building your code for production
-# RUN npm install --only=production
-RUN npm install
-
 # Copy app sources
 COPY . . 
+
+# If you are building your code for production
+RUN npm install --only=production
+
+# Else run
+# RUN npm install
 
 # Creates bundle.js 
 RUN npm run build:prod

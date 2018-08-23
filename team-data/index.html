@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vital Teams</title>
+    
+</head>
+
+<h1 id="htmlHeader">Teams</h1>
+
+<!-- Style section is after thought for this project, can be modified at any time for eye candy -->
+<style>
+</style>
+
+<body>
+  <!--Create list of links for each team-->
+        <div id="users">
+        <div id="teams"></div>
+          <script>
+            /****************************************
+              same fetch function from provider.js
+            ****************************************/
+            function getter() {
+             var webdata = fetch('http://localhost:8080/team', { mode: 'cors' }) // fetch is properly making call to the backend server but server is not returning data properly
+              .then((response) => {
+                return response.json();
+              }).then((jsonData) => {
+                console.log('Response: ', jsonData);
+                return jsonData;
+              }).catch((err) => {
+                alert('ERROR: Data could not be loaded');
+                console.log('Error in loading data ', err);
+              });
+              return webdata;
+            }
+
+
+            /****************************************
+              Create list of links
+            ****************************************/
+              function makeUL(keys) {
+              // Create the list element:
+                var list = document.createElement('ul');
+
+                for (var value in keys) {
+                  // check if the property/key is defined in the object itself, not in parent
+                  if (keys.hasOwnProperty(value)) {           
+                  console.log('dic: ',value, keys[value]);
+                  } 
+                  
+                // Variables for creating the list and link items:
+                  var item = document.createElement('li');
+                  var linkItem = document.createElement('a');
+                
+                // create links and give it a text value to be displayed
+                  linkItem.href = './'+ keys[value]['name'];
+                  linkItem.appendChild(document.createTextNode(keys[value]['name']));
+              
+                // Set its contents:
+                  item.appendChild(linkItem);
+
+                // Add it to the list:
+                  list.appendChild(item);
+                }
+              // Finally, return the constructed list:
+                return list;
+              }
+              
+              var items = getter().then((data)=> {
+                document.getElementById('users').appendChild(makeUL(data));
+              });
+              
+          </script>  
+        </div>
+<!--End of list creation-->
+
+<!-- Button for adding teams -->
+        <div>
+          <button class="button"id="addTeam"onclick="history.go(0)">Add Team</button>
+          <script>
+
+            let button = document.getElementById('addTeam');
+            button.addEventListener('click', () => {
+              var configData = {};
+              configData['name'] = prompt("Type in your team's name","");
+                configData['url'] = prompt('Copy & Paste link for RAW data file from BitBucket', '');
+
+              const xhr = new XMLHttpRequest();
+              xhr.onload = () => {
+                  alert('Ready to Save Modified Data');
+              };
+              xhr.open('post', '/setConfig');
+              xhr.send(JSON.stringify(configData));
+            })
+
+          </script>
+        </div>
+<!--End of button-->
+</body>
+</html>
