@@ -50,8 +50,8 @@
 
 ### Setup Guide:
 * Load in Docker Container
-    - Download Docker Image kbliss/vita-techradar OR run " docker build -t kbliss/vital-techradar . "
-    - Run a new container of the image in docker using this command "docker run --name vitalRadar -p 8080:8080 -d kbliss/vital-techradar"
+    - Download Docker Image kbliss/techradar OR run " docker build -t kbliss/techradar . "
+    - Run a new container of the image in docker using this command "docker run --name radar -p 8080:8080 -d kbliss/techradar"
 
 
 ### Dev Guide:
